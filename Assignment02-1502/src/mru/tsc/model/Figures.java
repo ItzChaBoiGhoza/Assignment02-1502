@@ -2,6 +2,10 @@ package mru.tsc.model;
 
 public class Figures extends ToyFormatting {
 	
+	/*
+	 * The Classification can either be Action, Doll, Or Historic
+	 * A, D, H
+	 */
 	char classification;
 	
 	public Figures(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String Classification) {

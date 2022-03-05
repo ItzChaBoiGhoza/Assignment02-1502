@@ -2,6 +2,10 @@ package mru.tsc.model;
 
 public class Puzzles extends ToyFormatting{
 	
+	/*
+	 * The puzzle-type can either be Mechanical, Cryptic, Logic, Trivia, or Riddle.
+	 * M, C, L, T, R
+	 */
 	char puzzleType;
 	
 	public Puzzles(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String PuzzleType) {
