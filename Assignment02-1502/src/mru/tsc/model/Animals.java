@@ -33,9 +33,8 @@ public class Animals extends ToyFormatting {
 
 	@Override
 	public String toString() {
-		return "Category: Animal [Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand + ", Price: " + price + ", Available Count: "
-				+ availableCount + ", Age Appropraite: " + ageAppropriate + ", Material: " + Material + ", Size:" + size
-				+ "]";
+		return "Category:Animal, Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand + ", Price: " + price + ", Available Count: "
+				+ availableCount + ", Age Appropraite: " + ageAppropriate + ", Material: " + Material + ", Size:" + size;
 	}
 	
 	public String format() {

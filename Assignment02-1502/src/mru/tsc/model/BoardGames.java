@@ -29,9 +29,9 @@ public class BoardGames extends ToyFormatting {
 	
 
 	public String toString(){
-		return "Category: Board Game [Serial Number:" + SN + ", Name: " + name + ", Brand: " + brand + 
+		return "Category:BoardGame, Serial Number:" + SN + ", Name: " + name + ", Brand: " + brand + 
 				", Price: " + price + ", Available Count: " + availableCount + ", Age Appropriate: " + ageAppropriate +
-				", Number of Players: " + numOfPlayers + ", Designer: " + designer + "]";
+				", Number of Players: " + numOfPlayers + ", Designer: " + designer;
 	}
 	
 	public String format() {

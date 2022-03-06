@@ -22,9 +22,9 @@ public class Figures extends ToyFormatting {
 	}
 	
 	public String toString() {
-		return "Category: Figures [Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand +
+		return "Category:Figure, Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand +
 				", Price: " + price + ", Available Count: " + availableCount + ", Age Appropriate: " + ageAppropriate +
-				", Classification: " + classification + "]";
+				", Classification: " + classification;
 	}
 	
 	public String format() {

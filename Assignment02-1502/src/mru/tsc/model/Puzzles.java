@@ -22,9 +22,9 @@ public class Puzzles extends ToyFormatting{
 	}
 	
 	public String toString() {
-		return "Category: Puzzles [Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand +
+		return "Category:Puzzles, Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand +
 				", Price: " + price + ", Available Count: " + availableCount + ", Age Appropriate: " + ageAppropriate +
-				", Puzzle Type: " + puzzleType + "]";
+				", Puzzle Type: " + puzzleType;
 	}
 	
 	public String format() {
