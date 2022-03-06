@@ -46,23 +46,23 @@ Scanner input;
 	
 	public void showSerialNumber(ToyFormatting toySerialNum) throws Exception{
 		if(toySerialNum != null) {
-			System.out.println(toySerialNum);
+			System.out.print(toySerialNum);
 		} else {
-			System.out.println("Serial Number not found");
+			System.out.println("Serial Number not Found");
 		}
 	}
 	
 	public String promptToyName() {
 		System.out.print("\nEnter Toy Name: ");
-		String name = input.nextLine();
+		String name = input.nextLine().trim();
 		return name;
 	}
 	
 	public void showName(ToyFormatting toyName) throws Exception{
 		if(toyName != null) {
-			System.out.println(toyName);
+			System.out.print(toyName);
 		} else {
-			System.out.println("Toy not found");
+			System.out.println("Toy not Found");
 		}
 	}
 	
@@ -75,11 +75,5 @@ Scanner input;
 		System.out.print("Enter Toy Type: ");
 		char option = input.nextLine().toLowerCase().charAt(0);
 		return option;
-	}
-	
-	public void showType(ToyFormatting toyType) {
-		if(toyType != null) {
-			
-		}
 	}
 }

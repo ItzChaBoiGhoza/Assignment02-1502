@@ -1,7 +1,6 @@
 package mru.tsc.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,13 +70,13 @@ public class AppManager {
 				String name = appMen.promptToyName();
 				ToyFormatting toyName = searchByName(name);
 				appMen.showName(toyName);
+				toySearchByName(name);
 				System.out.println("");
 				System.out.println("Press Enter to Continue");
 				input.nextLine();
 				break;
 			case 3:
 				char type = appMen.promptType();
-//				ToyFormatting toyType = searchByType(type);
 				break;
 			case 4:
 				launchApplication();
@@ -124,7 +123,7 @@ public class AppManager {
 		
 	}
 	
-	private void loadData() throws Exception {
+	public void loadData() throws Exception {
 		File db = new File(FILE_PATH);
 		String currentLine;
 		String[] splittedLine;
@@ -133,35 +132,34 @@ public class AppManager {
 			Scanner fileReader = new Scanner(db);
 			
 			while(fileReader.hasNextLine()) {
+				
 				currentLine = fileReader.nextLine();
 				splittedLine = currentLine.split(";");
 				char serialNum = splittedLine[0].charAt(0);
-				
-				if (typeChecker(serialNum) == "F") {
-					ToyFormatting F = new Figures(splittedLine[0], splittedLine[1], splittedLine[2],
+			
+				if(typeChecker(serialNum) == "F") {
+					ToyFormatting figure = new Figures(splittedLine[0], splittedLine[1], splittedLine[2],
 							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
 							Integer.parseInt(splittedLine[5]), splittedLine[6]);
-					toys.add(F);
-
+					toys.add(figure);
 				}
-				if (typeChecker(serialNum) == "A") {
-					ToyFormatting A = new Animals(splittedLine[0], splittedLine[1], splittedLine[2],
+				if(typeChecker(serialNum) == "B") {
+					ToyFormatting boardGame = new BoardGames(splittedLine[0], splittedLine[1], splittedLine[2],
 							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
 							Integer.parseInt(splittedLine[5]), splittedLine[6], splittedLine[7]);
-					toys.add(A);
+					toys.add(boardGame);
 				}
-				if (typeChecker(serialNum) == "P") {
-					ToyFormatting P = new Puzzles(splittedLine[0], splittedLine[1], splittedLine[2],
+				if(typeChecker(serialNum) == "A") {
+					ToyFormatting animal = new Animals(splittedLine[0], splittedLine[1], splittedLine[2],
+							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
+							Integer.parseInt(splittedLine[5]), splittedLine[6], splittedLine[7]);
+					toys.add(animal);
+				}
+				if(typeChecker(serialNum) == "P") {
+					ToyFormatting puzzle = new Puzzles(splittedLine[0], splittedLine[1], splittedLine[2],
 							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
 							Integer.parseInt(splittedLine[5]), splittedLine[6]);
-					toys.add(P);
-				}
-				if (typeChecker(serialNum) == "B") {
-					ToyFormatting B = new BoardGames(splittedLine[0], splittedLine[1], splittedLine[2],
-							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
-							Integer.parseInt(splittedLine[5]), splittedLine[6], splittedLine[7]);
-					toys.add(B);
-
+					toys.add(puzzle);
 				}
 			}
 			fileReader.close();
@@ -193,30 +191,36 @@ public class AppManager {
 		return Type;
 	}
 	
-	public void toySearch(String name) {
+	public void toySearchByName(String toyName) {
 		ToyFormatting toy = null;
-		for(ToyFormatting t : toys) {
-			if((t.getName().toUpperCase()).contains(name.toUpperCase())) {
+		for (ToyFormatting t : toys) {
+			if ((t.getName().toUpperCase()).contains(toyName.toUpperCase())) {
 				toy = t;
-				if(toy instanceof Figures) {
+				if (toy instanceof Puzzles)
+				{
+					Puzzles P = (Puzzles) toy;
+					System.out.println(P.toString());
+				}
+				if (toy instanceof Animals)
+				{
+					Animals A = (Animals) toy;
+					System.out.println(A.toString());
+				}
+				if (toy instanceof BoardGames)
+				{
+					BoardGames B = (BoardGames) toy;
+					System.out.println(B.toString());
+				}
+				if (toy instanceof Figures)
+				{
 					Figures F = (Figures) toy;
 					System.out.println(F.toString());
 				}
-				if(toy instanceof Animals) {
-					Animals animal = (Animals) toy;
-					System.out.println(animal.toString());
-				}
-				if(toy instanceof Puzzles) {
-					Puzzles puzzle = (Puzzles) toy;
-					System.out.println(puzzle.toString());
-				}
-				if(toy instanceof BoardGames) {
-					BoardGames boardGames = (BoardGames) toy;
-					System.out.println(boardGames.toString());
-				}
-				System.out.println(" ");
 			}
 		}
 	}
-
+	
+	public void toySearchByType() {
+		
+	}
 }
