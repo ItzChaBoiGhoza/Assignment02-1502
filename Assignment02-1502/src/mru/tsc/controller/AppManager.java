@@ -126,7 +126,10 @@ public class AppManager {
 		PrintWriter saveHere = new PrintWriter(db);
 		
 		System.out.println("");
-		System.out.println("Saving Data Into Databse...");
+		System.out.println("Saving Data Into Database...");
+		System.out.println("");
+		
+		System.out.println("*********** THANKS FOR VISITING US! ***********");
 		
 	}
 	
