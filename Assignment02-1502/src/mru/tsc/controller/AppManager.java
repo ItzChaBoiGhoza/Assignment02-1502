@@ -1,6 +1,9 @@
 package mru.tsc.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -118,8 +121,12 @@ public class AppManager {
 		
 	}
 
-	public void save() {
+	public void save() throws IOException {
+		File db = new File(FILE_PATH);
+		PrintWriter saveHere = new PrintWriter(db);
 		
+		System.out.println("");
+		System.out.println("Saving Data Into Databse...");
 		
 	}
 	

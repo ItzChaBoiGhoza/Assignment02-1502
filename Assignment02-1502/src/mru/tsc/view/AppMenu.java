@@ -13,11 +13,12 @@ Scanner input;
 	
 	public int showAppMenu() {
 		System.out.println("Welcome to Toy Store Company");
-		System.out.println("\nHow We May Help You?");
+		System.out.println("\nHow May We Help You?");
 		System.out.println("\n\t(1) Search Inventory and Purchase Toy");
 		System.out.println("\t(2) Add New Toy");
 		System.out.println("\t(3) Remove Toy");
 		System.out.println("\t(4) Save & Exit");
+		System.out.println("");
 		System.out.print("Enter Option: ");
 		
 		int option = input.nextInt();
@@ -31,6 +32,7 @@ Scanner input;
 		System.out.println("\t(2) Toy Name");
 		System.out.println("\t(3) Type");
 		System.out.println("\t(4) Back to Main Menu");
+		System.out.println("");
 		System.out.print("Enter Option: ");
 		
 		int option = input.nextInt();
@@ -72,6 +74,7 @@ Scanner input;
 		System.out.println("\t(F) Figure");
 		System.out.println("\t(P) Puzzle");
 		System.out.println("\t(B) Board Game");
+		System.out.println("");
 		System.out.print("Enter Toy Type: ");
 		char option = input.nextLine().toLowerCase().charAt(0);
 		return option;
