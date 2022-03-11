@@ -27,7 +27,7 @@ public class AppManager {
 	 * Calls loadData and launchApplication method
 	 * 
 	 * @throws Exception
-	 * @author Denzel Pascaul & Ghoza Ghozali
+	 * @author Denzel Pascual & Ghoza Ghozali
 	 */
 	public AppManager() throws Exception {
 		toys = new ArrayList<>();
@@ -35,6 +35,14 @@ public class AppManager {
 		loadData();
 		launchApplication();
 	}
+
+	/**
+	 * The method launchApplication is responsible for running the App.
+	 * Calls showAppMenu from the appMenu Class();
+	 * Displays Four choices; searchToy, Add Toy, Remove Toy, and Save and Exit
+	 * Loops until the user hits save and exit
+	 * @throws Exception 
+	 */
 
 	private void launchApplication() throws Exception {
 		boolean flag = true;
