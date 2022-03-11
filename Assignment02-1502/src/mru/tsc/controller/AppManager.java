@@ -1,6 +1,8 @@
 package mru.tsc.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,17 +14,35 @@ import mru.tsc.model.BoardGames;
 import mru.tsc.model.ToyFormatting;
 
 public class AppManager {
+	
+	
 	private final String FILE_PATH = "res/Toys.txt";
 	Scanner input = new Scanner(System.in);
 	ArrayList<ToyFormatting> toys;
 	AppMenu appMen;
 	
+	/**
+	 * Constructor
+	 * This class creates a new instance of the ArrayList and new instance of the appMenu class
+	 * Calls loadData and launchApplication method
+	 * 
+	 * @throws Exception
+	 * @author Denzel Pascual & Ghoza Ghozali
+	 */
 	public AppManager() throws Exception {
 		toys = new ArrayList<>();
 		appMen = new AppMenu();
 		loadData();
 		launchApplication();
 	}
+
+	/**
+	 * The method launchApplication is responsible for running the App.
+	 * Calls showAppMenu from the appMenu Class();
+	 * Displays Four choices; searchToy, Add Toy, Remove Toy, and Save and Exit
+	 * Loops until the user hits save and exit
+	 * @throws Exception 
+	 */
 
 	private void launchApplication() throws Exception {
 		boolean flag = true;
@@ -54,6 +74,7 @@ public class AppManager {
 		}
 	}
 
+	
 	public void searchToyMenu() throws Exception {
 		boolean flag = true;
 		int option;
@@ -88,6 +109,13 @@ public class AppManager {
 		}
 	}
 
+	/**
+	 * This method searches for the serial number and check if SN is 
+	 * equal to the serial number entered
+	 * 
+	 * @param sn
+	 * @return
+	 */
 	private ToyFormatting searchBySerial(String sn) {
 		ToyFormatting toy = null;
 		
@@ -100,6 +128,25 @@ public class AppManager {
 		
 		return toy;
 	}
+
+	/**
+	 * This method searches for the name of the toy in the ArrayList
+	 * 
+	 * @param name
+	 * @return
+	 */
+//	private ToyFormatting searchByName(String name) {
+//		ToyFormatting toy = null;
+//		
+//		for(ToyFormatting t : toys) {
+//			if(t.getName().equals(name)) {
+//				toy = t;
+//				break;
+//			}
+//		}
+//		return toy;
+//	}
+
 
 	public void addToy() {
 		
@@ -120,12 +167,55 @@ public class AppManager {
 			}
 		}
 	}
+	
+	public void removeToy() {
+		
 
-	public void save() {
+	}
+
+	/**
+	 * This methods saves new information into the database, and exits the program
+	 * 
+	 * @throws IOException
+	 */
+	public void save() throws IOException {
+		File db = new File(FILE_PATH);
+		PrintWriter saveHere = new PrintWriter(db);
 		
+		System.out.println("");
+		System.out.println("Saving Data Into Database...");
+		System.out.println("");
 		
+		System.out.println("*********** THANKS FOR VISITING US! ***********");
+		
+		int i = 0;
+		while(i < toys.size()) {
+			if (toys.get(i) instanceof Animals) {
+				Animals A = (Animals)toys.get(i);
+				saveHere.println(A.format());
+			}
+			if (toys.get(i) instanceof BoardGames) {
+				BoardGames B = (BoardGames)toys.get(i);
+				saveHere.println(B.format());
+			}
+			if (toys.get(i) instanceof Figures) {
+				Figures F = (Figures)toys.get(i);
+				saveHere.println(F.format());
+			}
+			if (toys.get(i) instanceof Puzzles) {
+				Puzzles P = (Puzzles)toys.get(i);
+				saveHere.println(P.format());
+			}
+			i++;
+		}
+		saveHere.close();
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @throws Exception
+	 */
 	public void loadData() throws Exception {
 		File db = new File(FILE_PATH);
 		String currentLine;
@@ -169,6 +259,13 @@ public class AppManager {
 		}
 	}
 	
+	/**
+	 * This method takes in the first digits of the serial number 
+	 * and uses a switch method to determine what type of toy it is.
+	 * 
+	 * @param serialNumber
+	 * @return Returns the type of toy as char
+	 */
 	public String typeChecker(char serialNumber) {
 		String Type = null;
 		switch (serialNumber) {
@@ -194,6 +291,12 @@ public class AppManager {
 		return Type;
 	}
 	
+	/**
+	 * This methods searches a toy by its name and prints the output
+	 * by using the toString method
+	 * 
+	 * @param toyName
+	 */
 	public void toySearchByName(String toyName) {
 		ToyFormatting toy = null;
 		for(ToyFormatting t : toys) {
