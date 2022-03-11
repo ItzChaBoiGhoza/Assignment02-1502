@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import mru.tsc.model.ToyFormatting;
 
+/**
+ * Display the menus
+ * @author Denzel Pascual & Ghoza Ghozali
+ *
+ */
 public class AppMenu {
 Scanner input;
 	
@@ -11,6 +16,11 @@ Scanner input;
 		input = new Scanner(System.in);
 	}
 	
+	/**
+	 * This method shows the main menu of the app
+	 * 
+	 * @return Returns an integer
+	 */
 	public int showAppMenu() {
 		System.out.println("Welcome to Toy Store Company");
 		System.out.println("\nHow May We Help You?");
@@ -26,6 +36,11 @@ Scanner input;
 		return option;
 	}
 	
+	/**
+	 * This methods shows the subMenu to the user
+	 * 
+	 * @return Returns an integer entered by the user
+	 */
 	public int showSubMenu() {
 		System.out.println("\nFind Toys With: ");
 		System.out.println("\n\t(1) Serial Number (SN)");
@@ -40,12 +55,24 @@ Scanner input;
 		return option;
 	}
 	
+	/**
+	 * Prompts the user for a Serial Number
+	 * 
+	 * @return
+	 */
 	public String promptSerialNumber() {
 		System.out.print("\nEnter Toy Serial Number: ");
 		String serialNum = input.nextLine().trim();
 		return serialNum;
 	}
 	
+	/**
+	 * This method checks if the serial number is valid
+	 * if toySerialNum does not equal null print it out
+	 * otherwise print "Serial number not found"
+	 * @param toySerialNum
+	 * @throws Exception
+	 */
 	public void showSerialNumber(ToyFormatting toySerialNum) throws Exception{
 		if(toySerialNum != null) {
 			System.out.print(toySerialNum);
@@ -54,12 +81,24 @@ Scanner input;
 		}
 	}
 	
+	/**
+	 * Prompts the user for the toy name
+	 * @return
+	 */
 	public String promptToyName() {
 		System.out.print("\nEnter Toy Name: ");
 		String name = input.nextLine().trim();
 		return name;
 	}
 	
+	/**
+	 * This method checks if the name is valid.
+	 * if toyName does not equal null print it out
+	 * otherwise print "Toy not found"
+	 * 
+	 * @param toyName
+	 * @throws Exception
+	 */
 	public void showName(ToyFormatting toyName) throws Exception{
 		if(toyName != null) {
 			System.out.print(toyName);
@@ -68,6 +107,12 @@ Scanner input;
 		}
 	}
 	
+	/**
+	 * Prompts the user for what type of toy they are looking for
+	 * by using char
+	 * 
+	 * @return Returns a char
+	 */
 	public char promptType() {
 		System.out.println("\nFind the Type of Toy: ");
 		System.out.println("\n\t(A) Animal");
