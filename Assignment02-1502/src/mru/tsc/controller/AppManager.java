@@ -40,7 +40,12 @@ public class AppManager {
 				addToy();
 				break;
 			case 3:
-				removeToy();
+				String sn = appMen.promptSerialNumber();
+				ToyFormatting toySerial = searchBySerial(sn);
+				appMen.showSerialNumber(toySerial);
+				System.out.println(" ");
+				char remove = appMen.promptRemoveToy();
+				removeToy(sn, remove);
 				break;
 			case 4:
 				save();
@@ -62,21 +67,20 @@ public class AppManager {
 				String sn = appMen.promptSerialNumber();
 				ToyFormatting toySerial= searchBySerial(sn);
 				appMen.showSerialNumber(toySerial);
-				System.out.println("");
-				System.out.println("Press Enter to Continue");
+				System.out.println("\nPress Enter to Continue");
 				input.nextLine();
 				break;
 			case 2:
 				String name = appMen.promptToyName();
-				ToyFormatting toyName = searchByName(name);
-				appMen.showName(toyName);
 				toySearchByName(name);
-				System.out.println("");
-				System.out.println("Press Enter to Continue");
+				System.out.println("\nPress Enter to Continue");
 				input.nextLine();
 				break;
 			case 3:
 				char type = appMen.promptType();
+				toySearchByType(type);
+				System.out.println("\nPress Enter to Continue");
+				input.nextLine();
 				break;
 			case 4:
 				launchApplication();
@@ -97,25 +101,24 @@ public class AppManager {
 		return toy;
 	}
 
-	private ToyFormatting searchByName(String name) {
-		ToyFormatting toy = null;
-		
-		for(ToyFormatting t : toys) {
-			if(t.getName().equals(name)) {
-				toy = t;
-				break;
-			}
-		}
-		return toy;
-	}
-
 	public void addToy() {
 		
 		
 	}
 
-	public void removeToy() {
-		
+	public void removeToy(String sn, char type) throws Exception {
+		int i = 0;
+		if(type == 'Y') {
+			while(i < toys.size()) {
+				String storedSN = toys.get(i).getSN();
+				if(storedSN.equals(sn)) {
+					toys.remove(i);
+					System.out.println("\nToy removed");
+					System.out.println(" ");
+				}
+				i++;
+			}
+		}
 	}
 
 	public void save() {
@@ -137,11 +140,11 @@ public class AppManager {
 				splittedLine = currentLine.split(";");
 				char serialNum = splittedLine[0].charAt(0);
 			
-				if(typeChecker(serialNum) == "F") {
-					ToyFormatting figure = new Figures(splittedLine[0], splittedLine[1], splittedLine[2],
+				if(typeChecker(serialNum) == "A") {
+					ToyFormatting animal = new Animals(splittedLine[0], splittedLine[1], splittedLine[2],
 							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
-							Integer.parseInt(splittedLine[5]), splittedLine[6]);
-					toys.add(figure);
+							Integer.parseInt(splittedLine[5]), splittedLine[6], splittedLine[7]);
+					toys.add(animal);
 				}
 				if(typeChecker(serialNum) == "B") {
 					ToyFormatting boardGame = new BoardGames(splittedLine[0], splittedLine[1], splittedLine[2],
@@ -149,11 +152,11 @@ public class AppManager {
 							Integer.parseInt(splittedLine[5]), splittedLine[6], splittedLine[7]);
 					toys.add(boardGame);
 				}
-				if(typeChecker(serialNum) == "A") {
-					ToyFormatting animal = new Animals(splittedLine[0], splittedLine[1], splittedLine[2],
+				if(typeChecker(serialNum) == "F") {
+					ToyFormatting figure = new Figures(splittedLine[0], splittedLine[1], splittedLine[2],
 							Double.parseDouble(splittedLine[3]), Integer.parseInt(splittedLine[4]),
-							Integer.parseInt(splittedLine[5]), splittedLine[6], splittedLine[7]);
-					toys.add(animal);
+							Integer.parseInt(splittedLine[5]), splittedLine[6]);
+					toys.add(figure);
 				}
 				if(typeChecker(serialNum) == "P") {
 					ToyFormatting puzzle = new Puzzles(splittedLine[0], splittedLine[1], splittedLine[2],
@@ -193,34 +196,73 @@ public class AppManager {
 	
 	public void toySearchByName(String toyName) {
 		ToyFormatting toy = null;
-		for (ToyFormatting t : toys) {
-			if ((t.getName().toUpperCase()).contains(toyName.toUpperCase())) {
+		for(ToyFormatting t : toys) {
+			if((t.getName().toUpperCase()).contains(toyName.toUpperCase())) {
 				toy = t;
-				if (toy instanceof Puzzles)
-				{
-					Puzzles P = (Puzzles) toy;
-					System.out.println(P.toString());
+				if(toy instanceof Animals) {
+					Animals animal = (Animals) toy;
+					System.out.println(animal.toString());
 				}
-				if (toy instanceof Animals)
-				{
-					Animals A = (Animals) toy;
-					System.out.println(A.toString());
+				if(toy instanceof BoardGames) {
+					BoardGames boardGame = (BoardGames) toy;
+					System.out.println(boardGame.toString());
 				}
-				if (toy instanceof BoardGames)
-				{
-					BoardGames B = (BoardGames) toy;
-					System.out.println(B.toString());
+				if(toy instanceof Figures) {
+					Figures figure = (Figures) toy;
+					System.out.println(figure.toString());
 				}
-				if (toy instanceof Figures)
-				{
-					Figures F = (Figures) toy;
-					System.out.println(F.toString());
+				if(toy instanceof Puzzles) {
+					Puzzles puzzle = (Puzzles) toy;
+					System.out.println(puzzle.toString());
 				}
 			}
 		}
 	}
 	
-	public void toySearchByType() {
-		
+	public void toySearchByType(char toyType) throws Exception {
+		int i;
+		if(toyType == 'A') {
+			i = 0;
+			while(i < toys.size()) {
+				if(toys.get(i) instanceof Animals) {
+					Animals animal = (Animals) toys.get(i);
+					System.out.println(animal.toString());
+				}
+				i++;
+			}
+		}
+		if(toyType == 'B') {
+			i = 0;
+			while(i < toys.size()) {
+				if(toys.get(i) instanceof BoardGames) {
+					BoardGames boardGame = (BoardGames) toys.get(i);
+					System.out.println(boardGame.toString());
+				}
+				i++;
+			}
+		}
+		if(toyType == 'F') {
+			i = 0;
+			while(i < toys.size()) {
+				if(toys.get(i) instanceof Figures) {
+					Figures figure = (Figures) toys.get(i);
+					System.out.println(figure.toString());
+				}
+				i++;
+			}
+		}
+		if(toyType == 'P') {
+			i = 0;
+			while(i < toys.size()) {
+				if(toys.get(i) instanceof Puzzles) {
+					Puzzles puzzle = (Puzzles) toys.get(i);
+					System.out.println(puzzle.toString());
+				}
+				i++;
+			}
+		}
+		if(toyType == 'E') {
+			searchToyMenu();
+		}
 	}
 }

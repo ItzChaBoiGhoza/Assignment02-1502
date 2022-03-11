@@ -18,7 +18,7 @@ Scanner input;
 		System.out.println("\t(2) Add New Toy");
 		System.out.println("\t(3) Remove Toy");
 		System.out.println("\t(4) Save & Exit");
-		System.out.print("Enter Option: ");
+		System.out.print("\nEnter Option: ");
 		
 		int option = input.nextInt();
 		input.nextLine();
@@ -26,12 +26,12 @@ Scanner input;
 	}
 	
 	public int showSubMenu() {
-		System.out.println("\nFind Toys With: ");
+		System.out.println("\nSearch Toy With: ");
 		System.out.println("\n\t(1) Serial Number (SN)");
 		System.out.println("\t(2) Toy Name");
 		System.out.println("\t(3) Type");
 		System.out.println("\t(4) Back to Main Menu");
-		System.out.print("Enter Option: ");
+		System.out.print("\nEnter Option: ");
 		
 		int option = input.nextInt();
 		input.nextLine();
@@ -47,8 +47,9 @@ Scanner input;
 	public void showSerialNumber(ToyFormatting toySerialNum) throws Exception{
 		if(toySerialNum != null) {
 			System.out.print(toySerialNum);
+			System.out.println(" ");
 		} else {
-			System.out.println("Serial Number not Found");
+			System.out.println("Toy not Found");
 		}
 	}
 	
@@ -67,13 +68,22 @@ Scanner input;
 	}
 	
 	public char promptType() {
-		System.out.println("\nFind the Type of Toy: ");
-		System.out.println("\n\t(A) Animal");
-		System.out.println("\t(F) Figure");
-		System.out.println("\t(P) Puzzle");
-		System.out.println("\t(B) Board Game");
-		System.out.print("Enter Toy Type: ");
-		char option = input.nextLine().toLowerCase().charAt(0);
+		System.out.println("\nSearch the Type of Toy: ");
+		System.out.println("\n\t(A) Animals");
+		System.out.println("\t(B) Board Games");
+		System.out.println("\t(F) Figures");
+		System.out.println("\t(P) Puzzles");
+		System.out.println("\t(E) Exit to Sub Menu");
+		System.out.print("\nEnter Toy Type: ");
+		
+		char option = input.nextLine().toUpperCase().charAt(0);
+		return option;
+	}
+	
+	public char promptRemoveToy() {
+		System.out.println("Do you want to delete this toy? (Y/N)");
+		System.out.print("Enter option: ");
+		char option = input.nextLine().toUpperCase().charAt(0);
 		return option;
 	}
 }
