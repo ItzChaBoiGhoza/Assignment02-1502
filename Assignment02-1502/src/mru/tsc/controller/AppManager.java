@@ -8,11 +8,16 @@ import java.util.Scanner;
 
 import mru.tsc.view.AppMenu;
 import mru.tsc.model.Figures;
+import mru.tsc.exceptions.IncorrectInput;
+import mru.tsc.exceptions.PlayersChecking;
 import mru.tsc.model.Animals;
 import mru.tsc.model.Puzzles;
 import mru.tsc.model.BoardGames;
 import mru.tsc.model.ToyFormatting;
 
+/*
+ * @author Denzel Pascual & Ghoza Ghozali
+ */
 public class AppManager {
 	
 	
@@ -27,7 +32,6 @@ public class AppManager {
 	 * Calls loadData and launchApplication method
 	 * 
 	 * @throws Exception
-	 * @author Denzel Pascual & Ghoza Ghozali
 	 */
 	public AppManager() throws Exception {
 		toys = new ArrayList<>();
@@ -134,6 +138,7 @@ public class AppManager {
 	 * 
 	 * @param name
 	 * @return
+	 * @throws Exception 
 	 */
 //	private ToyFormatting searchByName(String name) {
 //		ToyFormatting toy = null;
@@ -148,9 +153,28 @@ public class AppManager {
 //	}
 
 
-	public void addToy() {
-		
-		
+	public void addToy() throws Exception {
+		String sn = serialNumChecker();
+		boolean serialNumTaken = duplicateSerialNum(sn);
+		while(serialNumTaken) {
+			System.out.println("That Serial Number already exists");
+			System.out.println("Please enter a new Serial Number");
+			serialNumTaken = duplicateSerialNum(sn);
+		}
+		String toyType = typeChecker(("" + sn).charAt(0));
+		if(toyType == "A") {
+			addToyAnimal(sn);
+		}
+		if(toyType == "B") {
+			addToyBoardGame(sn);
+		}
+		if(toyType == "F") {
+			addToyFigure(sn);
+		}
+		if(toyType == "P") {
+			addToyPuzzle(sn);
+		}
+		launchApplication();
 	}
 
 	public void removeToy(String sn, char type) throws Exception {
@@ -166,11 +190,6 @@ public class AppManager {
 				i++;
 			}
 		}
-	}
-	
-	public void removeToy() {
-		
-
 	}
 
 	/**
@@ -209,6 +228,42 @@ public class AppManager {
 			i++;
 		}
 		saveHere.close();
+	}
+	
+	public boolean duplicateSerialNum(String sn) {
+		boolean repeatSN = false;
+		String storedSN = "0";
+		int i = 0;
+		while(i < toys.size()) {
+			storedSN = toys.get(i).getSN();
+			if(storedSN.equals(sn)) {
+				repeatSN = true;
+			}
+			i++;
+		}
+		return repeatSN;
+	}
+	
+	public String serialNumChecker() {
+		boolean valid = false;
+		String s = "0";
+		System.out.print("Enter Serial Number: ");
+		while(valid == false) {
+			if(input.hasNextLong()) {
+				s = input.next();
+				input.nextLine();
+				int length = String.valueOf(s).length();
+				if(length != 10) {
+					System.out.println("Please enter a 10 digit number");
+				} else {
+					valid = true;
+				}
+			} else {
+				System.out.println("Please input a number");
+				input.nextLine();
+			}
+		}
+		return s;
 	}
 	
 	/**
@@ -367,5 +422,134 @@ public class AppManager {
 		if(toyType == 'E') {
 			searchToyMenu();
 		}
+	}
+
+	public void addNewToyAnimal(String sn, String name, String brand, double price, int availableCount, int ageAppropriate, String materials, String size) {
+		ToyFormatting animal = new Animals(sn, name, brand, price, availableCount, ageAppropriate, materials, size);
+		toys.add(animal);
+	}
+	
+	public void addToyAnimal(String sn) throws IncorrectInput{
+		boolean validation = false;
+		String name = appMen.promptName();
+		String brand = appMen.promptBrand();
+		double price = appMen.promptPrice();
+		int availableCount = appMen.promptAvailableToy();
+		int ageAppropriate = appMen.promptAgeRecommendation();
+		String materials = appMen.promptMaterial();
+		String size = null;
+		while(validation == false) {
+			System.out.println("Choose the size of Animal: ");
+			System.out.println("\n\t(S) Small");
+			System.out.println("\t(M) Medium");
+			System.out.println("\t(L) Large");
+			System.out.print("\nEnter Size: ");
+			char option = input.nextLine().toUpperCase().charAt(0);
+			
+			if(option == 'S' || option == 'M' || option == 'L') {
+				validation = true;
+				size = "" + option;
+			} else {
+				System.out.println("Please enter a valid option");
+				input.nextLine();
+			}
+		}
+		addNewToyAnimal(sn, name, brand, price, availableCount, ageAppropriate, materials, size);
+		System.out.println("\n --------- Toy has been added ---------");
+		System.out.println("\nPress Enter to Continue");
+		input.nextLine();
+	}
+	
+	public void addNewToyBoardGame(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String players, String designers) {
+		ToyFormatting boardGame = new BoardGames(SN, name, brand, price, ageAppropriate, availableCount, designers, designers);
+		toys.add(boardGame);
+	}
+	
+	public void addToyBoardGame(String sn) throws IncorrectInput, PlayersChecking {
+		String name = appMen.promptName();
+		String brand = appMen.promptBrand();
+		double price = appMen.promptPrice();
+		int availableCount = appMen.promptAvailableToy();
+		int ageAppropriate = appMen.promptAgeRecommendation();
+		String players = appMen.promptPlayers();
+		String designers = appMen.promptDesigner();
+		addNewToyBoardGame(sn, name, brand, price, availableCount, ageAppropriate, players, designers);
+		System.out.println("\n --------- Toy has been added ---------");
+		System.out.println("\nPress Enter to Continue");
+		input.nextLine();
+	}
+	
+	public void addNewToyFigure(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String classification) {
+		ToyFormatting figure = new Figures(SN, name, brand, price, availableCount, ageAppropriate, classification);
+		toys.add(figure);
+	}
+	
+	public void addToyFigure(String sn) {
+		boolean validation = false;
+		String name = appMen.promptName();
+		String brand = appMen.promptBrand();
+		double price = appMen.promptPrice();
+		int availableCount = appMen.promptAvailableToy();
+		int ageAppropriate = appMen.promptAgeRecommendation();
+		String classification = null;
+		while(validation == false) {
+			System.out.println("Choose a classification for Figure: ");
+			System.out.println("\n\t(A) Action");
+			System.out.println("\t(D) Doll");
+			System.out.println("\t(H) Historic");
+			System.out.print("\nEnter Classification: ");
+			char option = input.nextLine().toUpperCase().charAt(0);
+			
+			if(option == 'A' || option == 'D' || option == 'H') {
+				validation = true;
+				classification = "" + option;
+			} else {
+				System.out.println("Please enter a valid option");
+				input.nextLine();
+			}
+		}
+		
+		addNewToyFigure(sn, name, brand, price, availableCount, ageAppropriate, classification);
+		System.out.println("\n --------- Toy has been added ---------");
+		System.out.println("\nPress Enter to Continue");
+		input.nextLine();
+	}
+	
+	public void addNewToyPuzzle(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String puzzleType) {
+		ToyFormatting puzzle = new Puzzles(SN, name, brand, price, ageAppropriate, ageAppropriate, puzzleType);
+		toys.add(puzzle);
+	}
+	
+	public void addToyPuzzle(String sn) {
+		boolean validation = false;
+		String name = appMen.promptName();
+		String brand = appMen.promptBrand();
+		double price = appMen.promptPrice();
+		int availableCount = appMen.promptAvailableToy();
+		int ageAppropriate = appMen.promptAgeRecommendation();
+		String puzzleType = null;
+		while(validation == false) {
+			System.out.println("Choose a Puzzle Type: ");
+			System.out.println("\n\t(C) Cryptic");
+			System.out.println("\t(L) Logic");
+			System.out.println("\t(M) Mechanical");
+			System.out.println("\t(R) Riddle");
+			System.out.println("\t(T) Trivia");
+			System.out.print("\nEnter Puzzle Type: ");
+			char option = input.nextLine().toUpperCase().charAt(0);
+			
+			if(option == 'C' || option == 'L' || option == 'M' || option == 'R' || option == 'T') {
+				validation = true;
+				puzzleType = "" + option;
+			} else {
+				System.out.println("Please enter a valid option");
+				input.nextLine();
+			}
+		}
+		
+		addNewToyPuzzle(sn, name, brand, price, availableCount, ageAppropriate, puzzleType);
+		System.out.println("\n --------- Toy has been added ---------");
+		System.out.println("\nPress Enter to Continue");
+		input.nextLine();
 	}
 }

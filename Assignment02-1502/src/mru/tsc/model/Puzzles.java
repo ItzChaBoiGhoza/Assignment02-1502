@@ -24,9 +24,9 @@ public class Puzzles extends ToyFormatting{
 	 * @param type
 	 */
 	
-	public Puzzles(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String PuzzleType) {
+	public Puzzles(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String puzzleType) {
 		super(SN, name, brand, price, availableCount, ageAppropriate);
-		puzzleType = PuzzleType.charAt(0);
+		this.puzzleType = puzzleType.charAt(0);
 	}
 
 	public char getPuzzleType() {

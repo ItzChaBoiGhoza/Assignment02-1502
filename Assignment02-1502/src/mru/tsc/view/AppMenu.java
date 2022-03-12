@@ -2,6 +2,8 @@ package mru.tsc.view;
 
 import java.util.Scanner;
 
+import mru.tsc.exceptions.IncorrectInput;
+import mru.tsc.exceptions.PlayersChecking;
 import mru.tsc.model.ToyFormatting;
 
 /**
@@ -32,7 +34,16 @@ Scanner input;
 		
 		int option = input.nextInt();
 		input.nextLine();
+		
+		if(option != 1 && option != 2 && option != 3 && option != 4) {
+			System.out.println(" ");
+			System.out.println("------------ INCORRECT OPTION ------------");
+			System.out.println("Please Try Again");
+			System.out.println(" ");
+		} 
+		
 		return option;
+		
 	}
 	
 	/**
@@ -130,5 +141,127 @@ Scanner input;
 		System.out.print("Enter option: ");
 		char option = input.nextLine().toUpperCase().charAt(0);
 		return option;
+	}
+	
+	public String promptName() {
+		System.out.print("What is the name of the toy: ");
+		String toyName = input.next();
+		return toyName;
+	}
+	
+	public String promptBrand() {
+		System.out.print("What is the brand of the toy: ");
+		String toyBrand = input.next();
+		return toyBrand;
+	}
+	
+	public int promptAgeRecommendation() {
+		System.out.print("What is the appropriate age: ");
+		return valueChecker();
+	}
+	
+	public int promptAvailableToy() {
+		System.out.print("How many toys are available for sale: ");
+		return valueChecker();
+	}
+	
+	public double promptPrice() {
+		boolean inputValid = false;
+		String price;
+		double toyPrice = 0;
+		while(inputValid == false) {
+			do {
+				input.nextLine();
+				System.out.print("What is the price of the toy: ");
+				price = input.nextLine();
+				toyPrice = Double.parseDouble(price);
+				inputValid = true;
+			} while(price == null);
+			try {
+				priceChecker(toyPrice);
+			} catch(IncorrectInput msg) {
+				System.out.println(msg.getMessage());
+				System.out.println(" ");
+				System.out.println("Press Enter to Continue");
+				inputValid = false;
+			}
+		}
+		return toyPrice;
+	}
+	
+	public String promptMaterial() {
+		System.out.print("What is the toy made out of: ");
+		String toyMaterial = input.nextLine();
+		return toyMaterial;
+	}
+	
+	public String promptPlayers() {
+		boolean inputValidation = false;
+		String s1;
+		String s2;
+		int minAmountPlayers = 0;
+		int maxAmountPlayers = 0;
+		while(inputValidation == false) {
+			do {
+				System.out.print("What is the minimum amount of players to play the game: ");
+				s1 = input.nextLine();
+				minAmountPlayers = Integer.parseInt(s1);
+			} while(s1 == null);
+			
+				do {
+					System.out.print("What is the maximum amount of players to play the game: ");
+					s2 = input.nextLine();
+					maxAmountPlayers = Integer.parseInt(s2);
+					inputValidation = true;
+				} while(s2 == null);
+				
+				try {
+					playerChecker(minAmountPlayers, maxAmountPlayers);
+				} catch(PlayersChecking msg) {
+					System.out.println(msg.getMessage());
+					System.out.println(" ");
+					System.out.println("Press Enter to Continue");
+					inputValidation = false;
+				}
+			}
+		String rangeOfPlayers = "" + minAmountPlayers + "-" + maxAmountPlayers;
+		return rangeOfPlayers;
+	}
+	
+	public String promptDesigner() {
+		System.out.print("Enter the Designer's Names(Use ',' to seperate the names if there is more than one name): " );
+		String designerName = input.next();
+		return designerName;
+	}
+	
+	public int valueChecker() {
+		int in = 0;
+		boolean validValue = false;
+		while(validValue == false) {
+			if(input.hasNextInt()) {
+				in = input.nextInt();
+				input.nextLine();
+				validValue = true;
+			} else {
+				System.out.println("Incorrect input");
+				System.out.println("Please input an integer");
+				input.nextLine();
+			}
+		}
+		return in;
+	}
+	
+	public double priceChecker(double p) throws IncorrectInput {
+		if(p < 0) {
+			//Checks if user input is not negative
+			throw new IncorrectInput();
+		}
+		return p;
+	}
+	
+	public void playerChecker(int min, int max) throws PlayersChecking  {
+		if(max < min) {
+			throw new PlayersChecking();
+		}
 	}
 }

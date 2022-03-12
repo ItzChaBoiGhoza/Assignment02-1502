@@ -22,10 +22,10 @@ public class Animals extends ToyFormatting {
 	 * @param type
 	 * @param type
 	 */
-	public Animals (String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String materials, String Size) {
+	public Animals (String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String materials, String size) {
 		super(SN, name, brand, price, availableCount, ageAppropriate);
 		Material = materials;
-		size = Size.charAt(0);
+		this.size = size.charAt(0);
 	}
 
 	public String getMaterial() {
@@ -47,8 +47,8 @@ public class Animals extends ToyFormatting {
 	// ToString method, allows the Animals object to appear in a readable form
 	@Override
 	public String toString() {
-		return "Category:Animal, Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand + ", Price: " + price + ", Available Count: "
-				+ availableCount + ", Age Appropraite: " + ageAppropriate + ", Material: " + Material + ", Size:" + size;
+		return "Category: Animal, Serial Number: " + SN + ", Name: " + name + ", Brand: " + brand + ", Price: " + price + ", Available Count: "
+				+ availableCount + ", Age Appropraite: " + ageAppropriate + ", Material: " + Material + ", Size: " + size;
 	}
 	
 	// This method creates the format for the Animals class
