@@ -78,7 +78,7 @@ Scanner input;
 	/**
 	 * This method checks if the serial number is valid
 	 * if toySerialNum does not equal null print it out
-	 * otherwise print "Serial number not found"
+	 * otherwise print "toy not found"
 	 * @param toySerialNum
 	 * @throws Exception
 	 */

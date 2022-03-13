@@ -79,6 +79,12 @@ public class AppManager {
 	}
 
 	
+	/**
+	 * searchToyMenu displays four option to the user which searches for
+	 * (toys serial number, toy name, toy type, and a return to Main menu)
+	 * 
+	 * @throws Exception
+	 */
 	public void searchToyMenu() throws Exception {
 		boolean flag = true;
 		int option;
@@ -134,25 +140,9 @@ public class AppManager {
 	}
 
 	/**
-	 * This method searches for the name of the toy in the ArrayList
-	 * 
-	 * @param name
-	 * @return
-	 * @throws Exception 
+	 * addToy() adds a toy into the database
+	 * @throws Exception
 	 */
-//	private ToyFormatting searchByName(String name) {
-//		ToyFormatting toy = null;
-//		
-//		for(ToyFormatting t : toys) {
-//			if(t.getName().equals(name)) {
-//				toy = t;
-//				break;
-//			}
-//		}
-//		return toy;
-//	}
-
-
 	public void addToy() throws Exception {
 		String sn = serialNumChecker();
 		boolean serialNumTaken = duplicateSerialNum(sn);
@@ -177,6 +167,12 @@ public class AppManager {
 		launchApplication();
 	}
 
+	/**
+	 * removeToy() removes a toy in the database
+	 * @param sn
+	 * @param type
+	 * @throws Exception
+	 */
 	public void removeToy(String sn, char type) throws Exception {
 		int i = 0;
 		if(type == 'Y') {
@@ -230,6 +226,14 @@ public class AppManager {
 		saveHere.close();
 	}
 	
+	/**
+	 * This method checks if the serial number entered by the user is the same
+	 * as the one in the database.
+	 * It check if it is a duplicate of the one in the database
+	 * 
+	 * @param sn
+	 * @return
+	 */
 	public boolean duplicateSerialNum(String sn) {
 		boolean repeatSN = false;
 		String storedSN = "0";
@@ -244,6 +248,13 @@ public class AppManager {
 		return repeatSN;
 	}
 	
+	/**
+	 * This method prompts the user for the serial number 
+	 * and checks for if the length of the serial number is equal to "10"
+	 * if not it will output a message saying "Enter a 10 digit number"
+	 * 
+	 * @return
+	 */
 	public String serialNumChecker() {
 		boolean valid = false;
 		String s = "0";
@@ -267,7 +278,10 @@ public class AppManager {
 	}
 	
 	/**
-	 * 
+	 * The loadData function reads the text from the text file. 
+	 * It determines what type of toy it is reading based on the Serial Number. 
+	 * After knowing the type of toy, it splits the data up into the appropriate pieces 
+	 * and uses those pieces to initialize correct type of toy and then adds those toys to the toy ArrayList.
 	 * 
 	 * @throws Exception
 	 */
