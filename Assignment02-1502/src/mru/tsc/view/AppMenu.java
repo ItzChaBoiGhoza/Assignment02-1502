@@ -7,8 +7,8 @@ import mru.tsc.exceptions.PlayersChecking;
 import mru.tsc.model.ToyFormatting;
 
 /**
- * Display the menus
- * @author Denzel Pascual & Ghoza Ghozali
+ * Prompts the user with questions regarding how they want to run the program
+ * @author Denzel Pascual & Ghoza Ghazali
  *
  */
 public class AppMenu {
@@ -35,10 +35,10 @@ Scanner input;
 		int option = input.nextInt();
 		input.nextLine();
 		
+		//Checks to make sure the user's input is valid
 		if(option != 1 && option != 2 && option != 3 && option != 4) {
 			System.out.println(" ");
 			System.out.println("------------ INCORRECT OPTION ------------");
-			System.out.println("Please Try Again");
 			System.out.println(" ");
 		} 
 		
@@ -61,6 +61,14 @@ Scanner input;
 		
 		int option = input.nextInt();
 		input.nextLine();
+		
+		//Checks to make sure the user's input is valid
+		if(option != 1 && option != 2 && option != 3 && option != 4) {
+			System.out.println(" ");
+			System.out.println("------------ INCORRECT OPTION ------------");
+			System.out.println(" ");
+		} 
+				
 		return option;
 	}
 	
@@ -133,38 +141,77 @@ Scanner input;
 		System.out.print("\nEnter Toy Type: ");
 		
 		char option = input.nextLine().toUpperCase().charAt(0);
+		
+		//Checks to make sure the user's input is valid
+		if(option != 'A' && option != 'B' && option != 'F' && option != 'P' && option != 'E') {
+			System.out.println(" ");
+			System.out.println("------------ INCORRECT OPTION ------------");
+			System.out.println(" ");
+		} 
 		return option;
 	}
 	
+	/**
+	 * Prompts the user if they want to remove toy
+	 * @return Returns the option Y/N
+	 */
 	public char promptRemoveToy() {
 		System.out.println("Do you want to delete this toy? (Y/N)");
 		System.out.print("Enter option: ");
 		char option = input.nextLine().toUpperCase().charAt(0);
+		
+		//Checks to make sure the user's input is valid
+		if(option != 'Y' && option != 'N') {
+			System.out.println(" ");
+			System.out.println("------------ INCORRECT OPTION ------------");
+			System.out.println(" ");
+		} 
+				
 		return option;
 	}
 	
+	/**
+	 * Prompts the user for the new toy's name
+	 * @return Returns the toy name
+	 */
 	public String promptName() {
 		System.out.print("What is the name of the toy: ");
 		String toyName = input.next();
 		return toyName;
 	}
 	
+	/**
+	 * Prompts the user for the new toy's brand
+	 * @return Returns the toy brand
+	 */
 	public String promptBrand() {
 		System.out.print("What is the brand of the toy: ");
 		String toyBrand = input.next();
 		return toyBrand;
 	}
 	
+	/**
+	 * Prompts the user for the toy's recommended age
+	 * @return Returns valid integer
+	 */
 	public int promptAgeRecommendation() {
 		System.out.print("What is the appropriate age: ");
 		return valueChecker();
 	}
 	
+	/**
+	 * Prompts the user for the available toy for sale
+	 * @return Returns valid integer
+	 */
 	public int promptAvailableToy() {
 		System.out.print("How many toys are available for sale: ");
 		return valueChecker();
 	}
 	
+	/**
+	 * Prompts the user for the toy's price
+	 * @return Returns the valid price
+	 */
 	public double promptPrice() {
 		boolean inputValid = false;
 		String price;
@@ -189,12 +236,20 @@ Scanner input;
 		return toyPrice;
 	}
 	
+	/**
+	 * Prompts the user for the toy's material
+	 * @return Returns the toy's material
+	 */
 	public String promptMaterial() {
 		System.out.print("What is the toy made out of: ");
 		String toyMaterial = input.nextLine();
 		return toyMaterial;
 	}
 	
+	/**
+	 * Prompts the user for the amount of players
+	 * @return Returns the amount of players required
+	 */
 	public String promptPlayers() {
 		boolean inputValidation = false;
 		String s1;
@@ -228,18 +283,26 @@ Scanner input;
 		return rangeOfPlayers;
 	}
 	
+	/**
+	 * Prompts the user for the toy's designer
+	 * @return Returns the name of the designer
+	 */
 	public String promptDesigner() {
 		System.out.print("Enter the Designer's Names(Use ',' to seperate the names if there is more than one name): " );
 		String designerName = input.next();
 		return designerName;
 	}
 	
+	/**
+	 * Checks if the user's input is a valid integer
+	 * @return Returns the integer
+	 */
 	public int valueChecker() {
-		int in = 0;
+		int i = 0;
 		boolean validValue = false;
 		while(validValue == false) {
 			if(input.hasNextInt()) {
-				in = input.nextInt();
+				i = input.nextInt();
 				input.nextLine();
 				validValue = true;
 			} else {
@@ -248,19 +311,34 @@ Scanner input;
 				input.nextLine();
 			}
 		}
-		return in;
+		return i;
 	}
 	
+	/**
+	 * Checks if the price is negative or not
+	 * @param p - User's input for price
+	 * @return Returns the price of the toy
+	 * @throws IncorrectInput
+	 */
 	public double priceChecker(double p) throws IncorrectInput {
+		//Checks if user input is not negative
 		if(p < 0) {
-			//Checks if user input is not negative
+			//Prompts the user if the price is negative
 			throw new IncorrectInput();
 		}
 		return p;
 	}
 	
+	/**
+	 * Checks if the amount of player is correct
+	 * @param min - user's input minimum amount of players
+	 * @param max - user's input maximum amount of players
+	 * @throws PlayersChecking
+	 */
 	public void playerChecker(int min, int max) throws PlayersChecking  {
+		//Checks if user input minimum amount of players is not greater than the maximum
 		if(max < min) {
+			//Prompts the user if the minimum amount of players is greater than the maximum amount
 			throw new PlayersChecking();
 		}
 	}

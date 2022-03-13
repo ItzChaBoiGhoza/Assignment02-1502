@@ -8,23 +8,22 @@ import java.util.Scanner;
 
 import mru.tsc.view.AppMenu;
 import mru.tsc.model.Figures;
-import mru.tsc.exceptions.IncorrectInput;
-import mru.tsc.exceptions.PlayersChecking;
 import mru.tsc.model.Animals;
 import mru.tsc.model.Puzzles;
 import mru.tsc.model.BoardGames;
 import mru.tsc.model.ToyFormatting;
 
 /*
- * @author Denzel Pascual & Ghoza Ghozali
+ * This class holds all the logic for the Toy Store Company
+ * @author Denzel Pascual & Ghoza Ghazali
  */
 public class AppManager {
 	
 	
-	private final String FILE_PATH = "res/Toys.txt";
-	Scanner input = new Scanner(System.in);
-	ArrayList<ToyFormatting> toys;
-	AppMenu appMen;
+	private final String FILE_PATH = "res/Toys.txt"; 
+	Scanner input = new Scanner(System.in); //Instantiate the java Scanner
+	ArrayList<ToyFormatting> toys; //Instantiate toy database/array
+	AppMenu appMen; //Instantiate the Appmenu from view folder
 	
 	/**
 	 * Constructor
@@ -41,18 +40,18 @@ public class AppManager {
 	}
 
 	/**
-	 * The method launchApplication is responsible for running the App.
+	 * The method launchApplication is responsible for running the App
 	 * Calls showAppMenu from the appMenu Class();
 	 * Displays Four choices; searchToy, Add Toy, Remove Toy, and Save and Exit
-	 * Loops until the user hits save and exit
+	 * searchToy - Searches the toy
+	 * Add Toy - Add a new toy to the database
+	 * Remove Toy - Remove toy from the database
+	 * Save and Exit - Saves and exit the program
 	 * @throws Exception 
 	 */
 
 	private void launchApplication() throws Exception {
-		boolean flag = true;
 		int option;
-		while (flag) {
-			
 			option = appMen.showAppMenu();
 			
 			switch (option) {
@@ -70,12 +69,12 @@ public class AppManager {
 				System.out.println(" ");
 				char remove = appMen.promptRemoveToy();
 				removeToy(sn, remove);
+				launchApplication();
 				break;
 			case 4:
 				save();
-				flag = false;
+				break;
 			}
-		}
 	}
 
 	
@@ -254,8 +253,9 @@ public class AppManager {
 	 * if not it will output a message saying "Enter a 10 digit number"
 	 * 
 	 * @return
+	 * @throws Exception 
 	 */
-	public String serialNumChecker() {
+	public String serialNumChecker() throws Exception {
 		boolean valid = false;
 		String s = "0";
 		System.out.print("Enter Serial Number: ");
@@ -266,11 +266,15 @@ public class AppManager {
 				int length = String.valueOf(s).length();
 				if(length != 10) {
 					System.out.println("Please enter a 10 digit number");
+					System.out.println(" ");
+					launchApplication();
 				} else {
 					valid = true;
 				}
 			} else {
 				System.out.println("Please input a number");
+				System.out.println(" ");
+				launchApplication();
 				input.nextLine();
 			}
 		}
@@ -448,7 +452,7 @@ public class AppManager {
 	}
 
 	/**
-	 * 
+	 * Sets the parameter for the new toy
 	 * @param sn
 	 * @param name
 	 * @param brand
@@ -463,7 +467,14 @@ public class AppManager {
 		toys.add(animal);
 	}
 	
-	public void addToyAnimal(String sn) throws IncorrectInput{
+	/**
+	 * Prompt the user for the characteristic of the new toy
+	 * name, brand, price, availability, recommended age and for this particular toy (Animal) the type of Animal:
+	 * Small, Medium and Large
+	 * Then, it stores the user's input and calls the its corresponding method with parameters and pushes all the user's input
+	 * @param sn - User's input serial number for the new toy
+	 */
+	public void addToyAnimal(String sn) {
 		boolean validation = false;
 		String name = appMen.promptName();
 		String brand = appMen.promptBrand();
@@ -488,18 +499,38 @@ public class AppManager {
 				input.nextLine();
 			}
 		}
+		
+		//Calls the toy's parameter object and pushes user's inputs
 		addNewToyAnimal(sn, name, brand, price, availableCount, ageAppropriate, materials, size);
 		System.out.println("\n --------- Toy has been added ---------");
 		System.out.println("\nPress Enter to Continue");
 		input.nextLine();
 	}
 	
+	/**
+	 * Sets the parameter for the new toy
+	 * @param SN
+	 * @param name
+	 * @param brand
+	 * @param price
+	 * @param availableCount
+	 * @param ageAppropriate
+	 * @param players
+	 * @param designers
+	 */
 	public void addNewToyBoardGame(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String players, String designers) {
 		ToyFormatting boardGame = new BoardGames(SN, name, brand, price, availableCount, ageAppropriate, players, designers);
 		toys.add(boardGame);
 	}
 	
-	public void addToyBoardGame(String sn) throws IncorrectInput, PlayersChecking {
+	/**
+	 * Prompt the user for the characteristic of the new toy
+	 * name, brand, price, availability, recommended age and for this particular toy (BoardGame) the type of BoardGame:
+	 * Player count (minimum amount of players, and maximum amount of player)
+	 * Then, it stores the user's input and calls the its corresponding method with parameters and pushes all the user's input
+	 * @param sn - User's input serial number for the new toy
+	 */
+	public void addToyBoardGame(String sn) {
 		String name = appMen.promptName();
 		String brand = appMen.promptBrand();
 		double price = appMen.promptPrice();
@@ -507,17 +538,36 @@ public class AppManager {
 		int ageAppropriate = appMen.promptAgeRecommendation();
 		String players = appMen.promptPlayers();
 		String designers = appMen.promptDesigner();
+		
+		//Calls the toy's parameter object and pushes user's inputs
 		addNewToyBoardGame(sn, name, brand, price, availableCount, ageAppropriate, players, designers);
 		System.out.println("\n --------- Toy has been added ---------");
 		System.out.println("\nPress Enter to Continue");
 		input.nextLine();
 	}
 	
+	/**
+	 * Sets the parameter for the new toy
+	 * @param SN
+	 * @param name
+	 * @param brand
+	 * @param price
+	 * @param availableCount
+	 * @param ageAppropriate
+	 * @param classification
+	 */
 	public void addNewToyFigure(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String classification) {
 		ToyFormatting figure = new Figures(SN, name, brand, price, availableCount, ageAppropriate, classification);
 		toys.add(figure);
 	}
 	
+	/**
+	 * Prompt the user for the characteristic of the new toy
+	 * name, brand, price, availability, recommended age and for this particular toy (Figure) the type of Figure:
+	 * Action, Doll and Historic
+	 * Then, it stores the user's input and calls the its corresponding method with parameters and pushes all the user's input
+	 * @param sn - User's input serial number for the new toy
+	 */
 	public void addToyFigure(String sn) {
 		boolean validation = false;
 		String name = appMen.promptName();
@@ -525,7 +575,7 @@ public class AppManager {
 		double price = appMen.promptPrice();
 		int availableCount = appMen.promptAvailableToy();
 		int ageAppropriate = appMen.promptAgeRecommendation();
-		String classification = null;
+		String type = null;
 		while(validation == false) {
 			System.out.println("Choose a classification for Figure: ");
 			System.out.println("\n\t(A) Action");
@@ -536,24 +586,42 @@ public class AppManager {
 			
 			if(option == 'A' || option == 'D' || option == 'H') {
 				validation = true;
-				classification = "" + option;
+				type = "" + option;
 			} else {
 				System.out.println("Please enter a valid option");
 				input.nextLine();
 			}
 		}
 		
-		addNewToyFigure(sn, name, brand, price, availableCount, ageAppropriate, classification);
+		//Calls the toy's parameter object and pushes user's inputs
+		addNewToyFigure(sn, name, brand, price, availableCount, ageAppropriate, type);
 		System.out.println("\n --------- Toy has been added ---------");
 		System.out.println("\nPress Enter to Continue");
 		input.nextLine();
 	}
 	
+	/**
+	 * Sets the parameter for the new toy
+	 * @param SN
+	 * @param name
+	 * @param brand
+	 * @param price
+	 * @param availableCount
+	 * @param ageAppropriate
+	 * @param puzzleType
+	 */
 	public void addNewToyPuzzle(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String puzzleType) {
 		ToyFormatting puzzle = new Puzzles(SN, name, brand, price, availableCount, ageAppropriate, puzzleType);
 		toys.add(puzzle);
 	}
 	
+	/**
+	 * Prompt the user for the characteristic of the new toy
+	 * name, brand, price, availability, recommended age and for this particular toy (Puzzle) the type of Puzzle:
+	 * Cryptic, Logic, Mechanical, Riddle and Trivia
+	 * Then, it stores the user's input and calls the its corresponding method with parameters and pushes all the user's input
+	 * @param sn - User's input serial number for the new toy
+	 */
 	public void addToyPuzzle(String sn) {
 		boolean validation = false;
 		String name = appMen.promptName();
@@ -581,6 +649,7 @@ public class AppManager {
 			}
 		}
 		
+		//Calls the toy's parameter object and pushes user's inputs
 		addNewToyPuzzle(sn, name, brand, price, availableCount, ageAppropriate, puzzleType);
 		System.out.println("\n --------- Toy has been added ---------");
 		System.out.println("\nPress Enter to Continue");
