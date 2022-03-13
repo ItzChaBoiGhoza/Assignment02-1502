@@ -227,3 +227,7 @@
 1234123456;Gundam;MyBrand;90.0;10;18;A
 1234567891;Gundam;MyBrand;90.99;30;18;A
 3456789012;dolly;MyBrand;13.99;6;40;wool;M
+4567890123;mojang;MyBrand;14.99;20;14;C
+7890123456;checkers;MyBrand;15.99;60;15;2-4;John
+8901234567;chessTwo;MyBrand;12.99;14;40;2-4;Smith
+9012345678;pokecards;MyBrand;13.99;20;12;2-5;Kyle

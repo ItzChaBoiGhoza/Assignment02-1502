@@ -19,7 +19,7 @@ public class BoardGames extends ToyFormatting {
 	 * @param type
 	 */
 	public BoardGames(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String players, String designers) {
-		super (SN, name, brand, price, ageAppropriate, availableCount);
+		super (SN, name, brand, price, availableCount, ageAppropriate);
 		numOfPlayers = players;
 		designer = designers;
 	}

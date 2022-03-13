@@ -9,6 +9,7 @@ import mru.tsc.model.Figures;
 class FigureClassTest {
 
 	/**
+	 * This test is to make sure the format matches
 	 * @author Denzel Pascual
 	 */
 	@Test

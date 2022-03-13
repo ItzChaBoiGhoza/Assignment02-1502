@@ -495,7 +495,7 @@ public class AppManager {
 	}
 	
 	public void addNewToyBoardGame(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String players, String designers) {
-		ToyFormatting boardGame = new BoardGames(SN, name, brand, price, ageAppropriate, availableCount, designers, designers);
+		ToyFormatting boardGame = new BoardGames(SN, name, brand, price, availableCount, ageAppropriate, players, designers);
 		toys.add(boardGame);
 	}
 	
@@ -550,7 +550,7 @@ public class AppManager {
 	}
 	
 	public void addNewToyPuzzle(String SN, String name, String brand, double price, int availableCount, int ageAppropriate, String puzzleType) {
-		ToyFormatting puzzle = new Puzzles(SN, name, brand, price, ageAppropriate, ageAppropriate, puzzleType);
+		ToyFormatting puzzle = new Puzzles(SN, name, brand, price, availableCount, ageAppropriate, puzzleType);
 		toys.add(puzzle);
 	}
 	

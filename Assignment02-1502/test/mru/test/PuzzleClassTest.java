@@ -9,13 +9,14 @@ import mru.tsc.model.Puzzles;
 class PuzzleClassTest {
 
 	/**
+	 * This test is to make sure the format matches
 	 * @author Denzel Pascual
 	 */
 	@Test
 	void test() {
-		Puzzles test1 = new Puzzles("5234567891", "test", "Testy", 12.12, 4, 7, "L");
+		Puzzles test1 = new Puzzles("4567890123", "mojang", "MyBrand", 14.99, 20, 14, "C");
 		String PuzzleTest = test1.format();
-		assertEquals("Puzzle [SN=5234567891, name=test, brand=Testy, price=12.12, availableCount=4, ageAppropraite=7, puzzleType=L]", PuzzleTest);
+		assertEquals("4567890123;mojang;MyBrand;14.99;20;14;C", PuzzleTest);
 	}
 
 }

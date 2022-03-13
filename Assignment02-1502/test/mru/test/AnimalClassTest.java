@@ -9,6 +9,7 @@ import mru.tsc.model.Animals;
 class AnimalClassTest {
 	
 	/**
+	 * This test is to make sure the format matches
 	 * @author Denzel Pascual
 	 */
 	@Test
