@@ -13,9 +13,9 @@ class BoardGameClassTest {
 	 */
 	@Test
 	void test() {
-		BoardGames test1 = new BoardGames("7234567891", "test", "Testy", 12.12, 4, 7, "2-8", "John Doe, James Smith");
-		String testBoardGame = test1.toString();
-		assertEquals("BoardGame [SN=7234567891, name=test, brand=Testy, price=12.12, availableCount=4, ageAppropraite=7, players=2-8, designers=John Doe, James Smith]", testBoardGame);
+		BoardGames test1 = new BoardGames("7890123456", "Mojang", "Mybrand", 20.99, 40, 14, "2-2", "YukiHaru");
+		String testBoardGame = test1.format();
+		assertEquals("7890123456;Mojang;MyBrand;20.99;40;14;2-2;YukiHaru", testBoardGame);
 	}
 
 }

@@ -223,3 +223,7 @@
 1396272830;Power Rangers;Game Mach;277.4;5;12;A
 1778180329;George Washington;Gamegenix;192.31;8;12;H
 4662861666;Acrostic;Game Pixel;70.84;9;11;T
+3456789101;teddySupreme;MyBrand;45.99;40;7;Wool;L
+1234123456;Gundam;MyBrand;90.0;10;18;A
+1234567891;Gundam;MyBrand;90.99;30;18;A
+3456789012;dolly;MyBrand;13.99;6;40;wool;M

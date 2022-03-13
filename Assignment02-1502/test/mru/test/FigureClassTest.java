@@ -13,9 +13,9 @@ class FigureClassTest {
 	 */
 	@Test
 	void test() {
-			Figures test1 = new Figures("1234567891", "test", "Testy", 12.12, 4, 7, "Doll");
-			String FigureTest = test1.toString();
-			assertEquals("Figure [SN=1234567891, name=test, brand=Testy, price=12.12, availableCount=4, ageAppropraite=7, classification=D]", FigureTest);
+			Figures test1 = new Figures("1234567891", "Gundam", "MyBrand", 90.99, 18, 30, "A");
+			String FigureTest = test1.format();
+			assertEquals("1234567891;Gundam;MyBrand;90.99;18;30;A", FigureTest);
 			
 		}
 }

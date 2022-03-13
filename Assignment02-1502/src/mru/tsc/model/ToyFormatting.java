@@ -27,7 +27,7 @@ public abstract class ToyFormatting {
 	 * @param ageAppropriate
 	 */
 	
-	public ToyFormatting(String SN, String name, String brand, double price, int ageAppropriate, int availableCount) {
+	public ToyFormatting(String SN, String name, String brand, double price, int availableCount, int ageAppropriate) {
 		this.SN = SN;
 		this.name = name;
 		this.brand = brand;

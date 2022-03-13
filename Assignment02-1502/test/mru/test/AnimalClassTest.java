@@ -13,9 +13,9 @@ class AnimalClassTest {
 	 */
 	@Test
 	void test() {
-		Animals test1 = new Animals("2234567891", "test", "Testy", 12.12, 4, 7, "Rubber", "Large");
-		String testAnimal = test1.toString();
-		assertEquals("Animal [SN=2234567891, name=test, brand=Testy, price=12.12, availableCount=4, ageAppropraite=7, Material=Rubber, size=L]", testAnimal);
+		Animals test1 = new Animals("3456789012", "dolly", "MyBrand", 13.99, 6, 40, "wool", "M");
+		String testAnimal = test1.format();
+		assertEquals("3456789012;dolly;MyBrand;13.99;6;40;wool;M", testAnimal);
 	}
 
 }
