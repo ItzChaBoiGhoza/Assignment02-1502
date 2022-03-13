@@ -280,8 +280,9 @@ public class AppManager {
 	/**
 	 * The loadData function reads the text from the text file. 
 	 * It determines what type of toy it is reading based on the Serial Number. 
-	 * After knowing the type of toy, it splits the data up into the appropriate pieces 
-	 * and uses those pieces to initialize correct type of toy and then adds those toys to the toy ArrayList.
+	 * After knowing the type of toy, the data is split into the appropriate category
+	 * and uses those categorize objects to initialize correct type of toy and then adds 
+	 * those toys to the toy ArrayList.
 	 * 
 	 * @throws Exception
 	 */
@@ -391,6 +392,14 @@ public class AppManager {
 		}
 	}
 	
+	/**
+	 * This method check for the toy type (figure, board game, figures, puzzles)
+	 * It does this by grabbing the length of array (.size) and checking if it is 
+	 * an instance of one of the toy model classes
+	 * Prints the output by using the toString method from the toy classes
+	 * @param toyType
+	 * @throws Exception
+	 */
 	public void toySearchByType(char toyType) throws Exception {
 		int i;
 		if(toyType == 'A') {
@@ -438,6 +447,17 @@ public class AppManager {
 		}
 	}
 
+	/**
+	 * 
+	 * @param sn
+	 * @param name
+	 * @param brand
+	 * @param price
+	 * @param availableCount
+	 * @param ageAppropriate
+	 * @param materials
+	 * @param size
+	 */
 	public void addNewToyAnimal(String sn, String name, String brand, double price, int availableCount, int ageAppropriate, String materials, String size) {
 		ToyFormatting animal = new Animals(sn, name, brand, price, availableCount, ageAppropriate, materials, size);
 		toys.add(animal);
