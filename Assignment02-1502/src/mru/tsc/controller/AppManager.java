@@ -85,9 +85,7 @@ public class AppManager {
 	 * @throws Exception
 	 */
 	public void searchToyMenu() throws Exception {
-		boolean flag = true;
 		int option;
-		while (flag) {
 			
 			option = appMen.showSubMenu();
 			
@@ -99,23 +97,29 @@ public class AppManager {
 				appMen.showSerialNumber(toySerial);
 				System.out.println("\nPress Enter to Continue");
 				input.nextLine();
+				appMen.showSubMenu();
+				launchApplication();
 				break;
 			case 2:
 				String name = appMen.promptToyName();
 				toySearchByName(name);
 				System.out.println("\nPress Enter to Continue");
 				input.nextLine();
+				appMen.showSubMenu();
+				launchApplication();
 				break;
 			case 3:
 				char type = appMen.promptType();
 				toySearchByType(type);
 				System.out.println("\nPress Enter to Continue");
 				input.nextLine();
+				appMen.showSubMenu();
+				launchApplication();
 				break;
 			case 4:
 				launchApplication();
+				break;
 			}
-		}
 	}
 
 	/**

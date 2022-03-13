@@ -262,7 +262,7 @@ Scanner input;
 				s1 = input.nextLine();
 				minAmountPlayers = Integer.parseInt(s1);
 			} while(s1 == null);
-			
+		
 				do {
 					System.out.print("What is the maximum amount of players to play the game: ");
 					s2 = input.nextLine();
